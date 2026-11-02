@@ -1,0 +1,20 @@
+// Prisma schema — add your models below.
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Example shape (remove/replace once the real domain is known):
+//
+// model Example {
+//   id        String   @id @default(uuid())
+//   name      String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
