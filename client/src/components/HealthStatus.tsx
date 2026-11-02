@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { api } from '../lib/api'
 
-type Health = { status: string; db: string }
+type Health = { status: string; db: string; redis: string }
 
 export function HealthStatus() {
   const [health, setHealth] = useState<Health | null>(null)
@@ -18,8 +18,8 @@ export function HealthStatus() {
   if (!health) return <p className="status">Checking API…</p>
 
   return (
-    <p className={`status ${health.db === 'up' ? 'status--up' : 'status--down'}`}>
-      API: {health.status} · DB: {health.db}
+    <p className={`status ${health.status === 'ok' ? 'status--up' : 'status--down'}`}>
+      API: {health.status} · DB: {health.db} · Cache: {health.redis}
     </p>
   )
 }

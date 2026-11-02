@@ -4,10 +4,11 @@ One folder per domain resource. Suggested layout:
 
 ```
 modules/<name>/
-  <name>.schema.ts      # Zod schemas for body/query/params + inferred types
-  <name>.service.ts     # business logic + Prisma calls (no req/res)
-  <name>.controller.ts  # maps HTTP <-> service, reads req.validated
-  <name>.routes.ts      # Router: validate(...) + controller handlers
+  <name>.schema.ts      # Zod schemas for body/query/params/headers + inferred types
+  <name>.repository.ts  # data access (Prisma/SQL); tenant-scoped functions take orgId first
+  <name>.service.ts     # business logic, caching (no req/res, no Prisma)
+  <name>.controller.ts  # maps HTTP <-> service, reads req.validated and req.user
+  <name>.routes.ts      # Router: authenticate, requireRole(...), validate(...), controller
 ```
 
 Then mount the router in `src/routes/index.ts`.

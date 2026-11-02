@@ -28,4 +28,8 @@ export class HttpError extends Error {
   static conflict(message = "Conflict", details?: unknown) {
     return new HttpError(409, "CONFLICT", message, details);
   }
+
+  static serviceUnavailable(message = "Service temporarily unavailable") {
+    return new HttpError(503, "SERVICE_UNAVAILABLE", message);
+  }
 }

@@ -6,10 +6,11 @@ type Schemas = {
   body?: z.ZodType;
   query?: z.ZodType;
   params?: z.ZodType;
+  headers?: z.ZodType;
 };
 
 /**
- * Validates req.body / req.query / req.params against Zod schemas.
+ * Validates req.body / req.query / req.params / req.headers against Zod schemas.
  * Parsed values are exposed on `req.validated` (Express 5 makes req.query read-only).
  */
 export const validate =
@@ -18,7 +19,7 @@ export const validate =
     const validated: NonNullable<typeof req.validated> = {};
     const issues: { location: string; path: string; message: string }[] = [];
 
-    for (const location of ["params", "query", "body"] as const) {
+    for (const location of ["headers", "params", "query", "body"] as const) {
       const schema = schemas[location];
       if (!schema) continue;
 
